@@ -4,6 +4,7 @@ using SistemaPedidos.Application.Profiles;
 using SistemaPedidos.Domain.Repositories;
 using SistemaPedidos.Infrastructure.Data;
 using SistemaPedidos.Infrastructure.Repositories;
+using SistemaPedidos.API.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +33,10 @@ builder.Services.AddAutoMapper(typeof(ClienteProfile).Assembly);
 
 // Configura Swagger (para testes)
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SchemaFilter<CpfSchemaFilter>();
+});
 
 builder.Services.AddControllers();
 
