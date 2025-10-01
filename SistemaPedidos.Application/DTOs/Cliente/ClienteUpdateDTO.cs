@@ -15,6 +15,10 @@ public class ClienteUpdateDTO
     [EmailAddress(ErrorMessage = "O e-mail informado não é válido.")]
     public string Email { get; set; } = null!;
 
+    [Required(ErrorMessage = "O CPF é obrigatório.")]
+    [StringLength(11, ErrorMessage = "O CPF deve ter 11 dígitos.")]
+    public string CPF { get; set; } = null!;
+
     [Phone(ErrorMessage = "O telefone informado não é válido.")]
     [StringLength(20, ErrorMessage = "O telefone deve ter no máximo 20 caracteres.")]
     public string? Telefone { get; set; }
