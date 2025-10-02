@@ -34,6 +34,13 @@ public class ClienteRepository : IClienteRepository
             .FirstOrDefaultAsync(c => c.Id == id);
     }
 
+    public async Task<Cliente?> GetByCpfAsync(string cpf)
+    {
+        return await _context.Clientes
+            .AsNoTracking()
+            .FirstOrDefaultAsync(c => c.CPF == cpf);
+    }
+
     public void Update(Cliente cliente)
     {
         _context.Clientes.Update(cliente);
