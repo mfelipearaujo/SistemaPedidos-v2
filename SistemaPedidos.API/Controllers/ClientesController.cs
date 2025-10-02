@@ -46,6 +46,20 @@ public class ClientesController : ControllerBase
         return Ok(clientesDto);
     }
 
+    // GET: api/v1/clientes/cpf/{cpf}
+    [HttpGet("{cpf}")]
+    public async Task<ActionResult<ClienteReadDTO>> GetByCpf(string cpf)
+    {
+        var cliente = await _unitOfWork.Clientes.GetByCpfAsync(cpf);
+
+        if (cliente is null)
+            return NotFound();
+
+        var clienteDto = _mapper.Map<ClienteReadDTO>(cliente);
+
+        return Ok(clienteDto);
+    }
+
     // GET: api/v1/clientes/{id}
     [HttpGet("{id}")]
     public async Task<ActionResult<ClienteReadDTO>> GetById(Guid id)
